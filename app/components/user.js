@@ -9,12 +9,6 @@ export function User({ userProp }) {
 
   async function handleVacilo(event, userId) {
     event.preventDefault();
-    await fetch("/api/vacilos", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name: vacilo, userId }),
-    });
-
     setUser({
       ...user,
       vacilos: [
@@ -30,6 +24,12 @@ export function User({ userProp }) {
     });
     setVacilo("");
     setIsInputOpen(false);
+
+    await fetch("/api/vacilos", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name: vacilo, userId }),
+    });
   }
 
   return (
