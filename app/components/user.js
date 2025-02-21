@@ -19,7 +19,13 @@ export function User({ userProp }) {
       ...user,
       vacilos: [
         ...user.vacilos,
-        { id: user.vacilos[user.vacilos.length - 1].id + 1, name: vacilo },
+        {
+          id:
+            user.vacilos.length > 0
+              ? user.vacilos[user.vacilos.length - 1].id + 1
+              : 1,
+          name: vacilo,
+        },
       ],
     });
     setVacilo("");

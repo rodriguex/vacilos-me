@@ -1,7 +1,7 @@
 import { User } from "./components/user";
 
 async function getUsers() {
-  const res = await fetch("/api/users", {
+  const res = await fetch(`${process.env.BASE_URL}/api/users`, {
     cache: "no-store",
   });
   return res.json();
