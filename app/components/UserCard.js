@@ -55,7 +55,9 @@ export default function UserCard({ user }) {
           </ul>
         </div>
       ) : (
-        <span>sem vacilos por enquanto...</span>
+        <span className="font-bold italic text-gray-400">
+          sem vacilos por enquanto...
+        </span>
       )}
 
       <span
