@@ -37,15 +37,15 @@ export default function UserCard({ user }) {
       {user.vacilos.length > 0 ? (
         <div className="mt-2">
           <ul className="list-disc">
-            <span className="mb-3">Vacilos:</span>
+            <span className="block mb-1 italic font-bold">vacilos:</span>
             {user.vacilos.map((vacilo) => (
               <li
-                className="p-2 mb-2 rounded border border-gray-200 flex items-center justify-between"
+                className="p-2 mb-2 rounded-lg border border-gray-100 flex items-center justify-between"
                 key={vacilo.id}
               >
                 <span>{vacilo.name}</span>
                 <span
-                  className="font-bold text-lg text-red-700 cursor-pointer"
+                  className="font-bold text-lg text-red-500 hover:text-red-700 cursor-pointer"
                   onClick={() => handleRemoveVacilo(vacilo.id)}
                 >
                   X
@@ -62,7 +62,13 @@ export default function UserCard({ user }) {
         onClick={() => setIsInputOpen(!isInputOpen)}
         className="w-fit mt-4 text-purple-800 cursor-pointer"
       >
-        {!isInputOpen ? "Adicionar vacilo" : "Fechar"}
+        {!isInputOpen ? (
+          <span className="border border-purple-800 p-2 rounded hover:bg-purple-800 hover:text-white">
+            + Adicionar vacilo
+          </span>
+        ) : (
+          "Fechar"
+        )}
       </span>
 
       {isInputOpen && (

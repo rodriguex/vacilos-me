@@ -16,7 +16,7 @@ export default async function Page() {
       <h1 className="font-extrabold text-3xl">Usuários</h1>
       <AddUserButton />
 
-      <div className="mt-4 flex flex-wrap gap-4">
+      <div className="mt-4 grid gris-cols-1 md:grid-cols-3 gap-4">
         {users.map((user) => (
           <UserCard key={user.id} user={user} />
         ))}
