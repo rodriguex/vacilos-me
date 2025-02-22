@@ -2,34 +2,29 @@
 
 import { useState } from "react";
 
-export function User({ userProp }) {
-  const [user, setUser] = useState(userProp);
+export default function UserCard({ user }) {
   const [isInputOpen, setIsInputOpen] = useState(false);
   const [vacilo, setVacilo] = useState("");
 
   async function handleVacilo(event, userId) {
     event.preventDefault();
-    setUser({
-      ...user,
-      vacilos: [
-        ...user.vacilos,
-        {
-          id:
-            user.vacilos.length > 0
-              ? user.vacilos[user.vacilos.length - 1].id + 1
-              : 1,
-          name: vacilo,
-        },
-      ],
-    });
-    setVacilo("");
-    setIsInputOpen(false);
-
-    await fetch("/api/vacilos", {
+    const res = await fetch("/api/vacilos", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name: vacilo, userId }),
     });
+    if (res.status === 200) {
+      window.location.reload();
+    }
+  }
+
+  async function handleRemoveVacilo(id) {
+    const req = await fetch(`/api/vacilos/${id}`, {
+      method: "DELETE",
+    });
+    if (req.status === 200) {
+      window.location.reload();
+    }
   }
 
   return (
@@ -37,14 +32,24 @@ export function User({ userProp }) {
       key={user.id}
       className="h-fit flex flex-col flex-grow flex-shrink basis-[300px] shadow p-6 rounded"
     >
-      <h1>{user.name}</h1>
+      <h1 className="text-xl">{user.name}</h1>
 
       {user.vacilos.length > 0 ? (
         <div className="mt-2">
           <ul className="list-disc">
+            <span className="mb-3">Vacilos:</span>
             {user.vacilos.map((vacilo) => (
-              <li className="ml-5" key={vacilo.id}>
-                {vacilo.name}
+              <li
+                className="p-2 mb-2 rounded border border-gray-200 flex items-center justify-between"
+                key={vacilo.id}
+              >
+                <span>{vacilo.name}</span>
+                <span
+                  className="font-bold text-lg text-red-700 cursor-pointer"
+                  onClick={() => handleRemoveVacilo(vacilo.id)}
+                >
+                  X
+                </span>
               </li>
             ))}
           </ul>
@@ -52,11 +57,12 @@ export function User({ userProp }) {
       ) : (
         <span>sem vacilos por enquanto...</span>
       )}
+
       <span
         onClick={() => setIsInputOpen(!isInputOpen)}
-        className="mt-4 text-purple-800 cursor-pointer"
+        className="w-fit mt-4 text-purple-800 cursor-pointer"
       >
-        {!isInputOpen ? "Adicionar vacilo" : "Fechar input"}
+        {!isInputOpen ? "Adicionar vacilo" : "Fechar"}
       </span>
 
       {isInputOpen && (
