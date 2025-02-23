@@ -23,17 +23,21 @@ import {
 } from "@/components/ui/select";
 
 export default function UserCard({ user, vacilos }) {
-  const [isInputOpen, setIsInputOpen] = useState(false);
   const [vacilo, setVacilo] = useState("");
+  const [selectedVacilo, setSelectedVacilo] = useState("");
   const [isSaving, setIsSaving] = useState(false);
 
   async function handleVacilo(event, userId) {
-    setIsSaving(true);
     event.preventDefault();
+    setIsSaving(true);
+
     const res = await fetch("/api/vacilos", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name: vacilo, userId }),
+      body: JSON.stringify({
+        name: selectedVacilo !== "" ? selectedVacilo : vacilo,
+        userId,
+      }),
     });
     if (res.status === 200) {
       window.location.reload();
@@ -60,7 +64,7 @@ export default function UserCard({ user, vacilos }) {
           <ul className="list-disc">
             <span className="block mb-1 italic font-bold">vacilos:</span>
             {user.vacilos.map((vacilo) => (
-              <VaciloItem key={vacilo.id} vacilo={vacilo} />
+              <VaciloItem key={`${user.id} - ${vacilo.id}`} vacilo={vacilo} />
             ))}
           </ul>
         </div>
@@ -75,7 +79,6 @@ export default function UserCard({ user, vacilos }) {
             <CircleDollarSign /> Adicionar vacilo
           </Button>
         </DialogTrigger>
-
         <DialogContent>
           <DialogHeader>
             <DialogTitle className="font-extrabold text-2xl">
@@ -87,7 +90,11 @@ export default function UserCard({ user, vacilos }) {
           </DialogHeader>
           <form onSubmit={(e) => handleVacilo(e, user.id)} className="w-full">
             {vacilos.length > 0 && (
-              <Select className="w-full">
+              <Select
+                defaultValue={selectedVacilo}
+                onValueChange={(value) => setSelectedVacilo(value)}
+                className="w-full"
+              >
                 <SelectTrigger className="w-[280px]">
                   <SelectValue
                     placeholder="Selecione um vacilo ou crie um novo"
@@ -97,15 +104,20 @@ export default function UserCard({ user, vacilos }) {
                 <SelectContent>
                   <SelectGroup>
                     {vacilos.map((vacilo) => (
-                      <SelectItem value={vacilo.name} />
+                      <SelectItem key={vacilo.id} value={vacilo.name}>
+                        {vacilo.name}
+                      </SelectItem>
                     ))}
                   </SelectGroup>
                 </SelectContent>
               </Select>
             )}
             <input
-              className="border border-gray-300"
+              required={vacilos.length == 0 ? true : false}
+              className="p-2 rounded-lg mr-2 border border-gray-300 focus:outline-none"
               placeholder="Adicionar vacilo"
+              value={vacilo}
+              onChange={(e) => setVacilo(e.target.value)}
             />
 
             {isSaving && <Loader2 className="mt-2 animate-spin" />}
