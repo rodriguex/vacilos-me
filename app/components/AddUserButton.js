@@ -1,5 +1,7 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
+import { Minus, UserPlus } from "lucide-react";
 import { useState } from "react";
 
 export default function AddUserButton() {
@@ -20,12 +22,13 @@ export default function AddUserButton() {
 
   return (
     <div>
-      <button
+      <Button
         onClick={() => setIsOpenInput(!isOpenInput)}
-        className="mt-3 text-sm border border-purple-800 px-3 py-2 rounded text-purple-800 hover:bg-purple-800 hover:text-white"
+        className="relative top-[-3px] mt-4 p-3 rounded-lg"
       >
-        {isOpenInput ? "Fechar" : "Adicionar novo usuário"}
-      </button>
+        {isOpenInput ? <Minus color="white" /> : <UserPlus color="white" />}
+        {isOpenInput ? "Fechar" : "Criar"}
+      </Button>
 
       {isOpenInput && (
         <form onSubmit={(e) => handleNewUser(e)} className="mt-3 w-full">
