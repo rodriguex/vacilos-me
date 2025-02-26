@@ -35,20 +35,19 @@ async function handleSubmit() {
 			<form @submit.prevent="handleSubmit">
 				<input
 					v-if="isInputOpen"
+					v-model="newUser"
 					ref="inputRef"
 					class="border-2 p-3 rounded-lg"
-					v-model="newUser"
 				/>
 			</form>
 		</div>
-		<div class="flex flex-wrap items-center gap-3">
-			<div
-				class="border-2 border-gray-300 w-fit p-3 rounded-lg"
+		<div class="flex flex-wrap gap-3">
+			<UserCard
 				v-for="user in data.users"
 				:key="user.id"
-			>
-				<UserCard :user="user" />
-			</div>
+				:user="user"
+				:refresh="refresh"
+			/>
 		</div>
 	</div>
 </template>
