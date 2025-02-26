@@ -18,8 +18,10 @@ async function handleSubmit() {
 <template>
 	<form @submit.prevent="handleSubmit">
 		<input
-			class="border border-gray-300 p-2 rounded-lg focus:outline-none"
+			id="my-bad"
+			class="border border-gray-100 p-4 rounded-lg focus:outline-none placeholder:text-gray-300 placeholder:font-extrabold font-bold"
 			v-model="vacilo"
+			placeholder="adicionar novo vacilo..."
 		/>
 	</form>
 </template>
