@@ -2,7 +2,16 @@
 import type { user, user_vacilo, vacilo } from "@prisma/client";
 
 defineProps<{
-	user: user & { user_vacilo: user_vacilo & { vacilo: vacilo }[] };
+	user: user & {
+		user_vacilo: user_vacilo &
+			{
+				id: Number;
+				user_id: Number;
+				vacilo_id: Number;
+				created_at: Date;
+				vacilo: vacilo;
+			}[];
+	};
 	vacilosPosition: Number;
 	refresh: () => void;
 }>();
@@ -31,7 +40,8 @@ defineProps<{
 						:key="user_vacilo.vacilo.id"
 						class="ml-5"
 					>
-						{{ user_vacilo.vacilo.name }}
+						<span>{{ user_vacilo.vacilo.name }}</span>
+						<span class="ml-2">{{ user_vacilo.created_at }}</span>
 					</li>
 				</ul>
 			</div>
