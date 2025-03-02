@@ -1,13 +1,18 @@
 <script lang="ts" setup>
-const props = defineProps<{ userId: Number; refresh: () => void }>();
+const props = defineProps<{
+	mistake_period_id: number;
+	user_id: number;
+	refresh: () => void;
+}>();
 const vacilo = ref("");
 
 async function handleSubmit() {
-	await $fetch("/api/vacilos", {
+	await $fetch("/api/mistakes", {
 		method: "POST",
 		body: {
 			name: vacilo.value,
-			user_id: props.userId,
+			user_id: props.user_id,
+			mistake_period_id: props.mistake_period_id,
 		},
 	});
 	vacilo.value = "";
@@ -18,8 +23,7 @@ async function handleSubmit() {
 <template>
 	<form @submit.prevent="handleSubmit">
 		<input
-			id="my-bad"
-			class="border border-gray-100 p-4 rounded-lg focus:outline-none placeholder:text-gray-300 placeholder:font-extrabold font-bold"
+			class="mt-2 border border-gray-200 focus:border-black p-3 rounded focus:outline-none placeholder:text-gray-400"
 			v-model="vacilo"
 			placeholder="adicionar novo vacilo..."
 		/>

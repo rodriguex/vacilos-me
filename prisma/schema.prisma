@@ -8,22 +8,32 @@ datasource db {
 }
 
 model user {
-  id          Int           @id @default(autoincrement())
-  name        String
-  user_vacilo user_vacilo[]
+  id       Int            @id @default(autoincrement())
+  name     String
+  mistakes user_mistake[]
 }
 
-model vacilo {
-  id          Int           @id @default(autoincrement())
-  name        String        @unique
-  user_vacilo user_vacilo[]
+model mistake {
+  id      Int            @id @default(autoincrement())
+  name    String         @unique
+  mistake user_mistake[]
 }
 
-model user_vacilo {
-  id         Int      @id @default(autoincrement())
-  user_id    Int
-  vacilo_id  Int
-  user       user     @relation(fields: [user_id], references: [id])
-  vacilo     vacilo   @relation(fields: [vacilo_id], references: [id])
-  created_at DateTime @default(now())
+model mistake_period {
+  id          Int            @id @default(autoincrement())
+  created_at  DateTime       @default(now())
+  finished_at DateTime?
+  is_active   Boolean        @default(true)
+  mistakes    user_mistake[]
+}
+
+model user_mistake {
+  id                Int            @id @default(autoincrement())
+  mistake_period_id Int
+  mistake_period    mistake_period @relation(fields: [mistake_period_id], references: [id])
+  user_id           Int
+  user              user           @relation(fields: [user_id], references: [id])
+  mistake_id        Int
+  mistake           mistake        @relation(fields: [mistake_id], references: [id])
+  created_at        DateTime       @default(now())
 }
