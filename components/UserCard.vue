@@ -38,7 +38,7 @@ defineProps<{
 					<li
 						v-for="user_vacilo in user.user_vacilo"
 						:key="user_vacilo.vacilo.id"
-						class="border-b-2 border-gray-200 w-fit ml-5"
+						class="shadow-lg rounded-lg w-fit ml-5"
 					>
 						<span>{{ user_vacilo.vacilo.name }}</span>
 						<span class="ml-2">{{ user_vacilo.created_at }}</span>
