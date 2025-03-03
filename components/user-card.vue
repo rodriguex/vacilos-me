@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { mistake_period, user } from "@prisma/client";
+import type { user } from "@prisma/client";
 
 defineProps<{
 	user: user;
@@ -31,7 +31,7 @@ defineProps<{
 					</li>
 				</ul>
 			</div>
-			<NewVacilo
+			<new-vacilo
 				:mistake_period_id="mistake_period_id"
 				:user_id="user.id"
 				:refresh="refresh"

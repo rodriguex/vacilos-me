@@ -1,13 +1,13 @@
 import { prisma } from "~/prisma/client";
 
 export default defineEventHandler(async _ => {
-	const lastActiveMistakePeriod = await prisma.mistake_period.findFirst({
+	const last_active_mistake_period = await prisma.mistake_period.findFirst({
 		where: { is_active: true },
 	});
 
-	if (lastActiveMistakePeriod) {
+	if (last_active_mistake_period) {
 		await prisma.mistake_period.update({
-			where: { id: lastActiveMistakePeriod?.id },
+			where: { id: last_active_mistake_period?.id },
 			data: { is_active: false },
 		});
 	}

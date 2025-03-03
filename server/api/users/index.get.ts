@@ -1,21 +1,21 @@
 import { prisma } from "~/prisma/client";
 
 export default defineEventHandler(async _ => {
-	const activeMistakePeriod = await prisma.mistake_period.findFirst({
+	const active_mistake_period = await prisma.mistake_period.findFirst({
 		where: { is_active: true },
 	});
 
-	if (!activeMistakePeriod) {
+	if (!active_mistake_period) {
 		return { users: [] };
 	}
 
 	const users = await prisma.user.findMany();
-	const userMistakesByPeriod = await prisma.user_mistake.findMany({
+	const user_mistakes_by_period = await prisma.user_mistake.findMany({
 		include: { mistake: true, user: true, mistake_period: true },
-		where: { mistake_period_id: activeMistakePeriod.id },
+		where: { mistake_period_id: active_mistake_period.id },
 	});
 
-	if (!userMistakesByPeriod) {
+	if (!user_mistakes_by_period) {
 		return { users, mistakes: [] };
 	}
 
@@ -24,7 +24,7 @@ export default defineEventHandler(async _ => {
 		items: { id: number; name: string }[];
 	}[] = [];
 
-	userMistakesByPeriod.forEach(item => {
+	user_mistakes_by_period.forEach(item => {
 		const idx = mistakes.findIndex(mistake => mistake.user_id == item.user_id);
 		if (idx > -1) {
 			mistakes[idx].items.push({
@@ -44,5 +44,5 @@ export default defineEventHandler(async _ => {
 		}
 	});
 
-	return { mistake_period: activeMistakePeriod, users, mistakes };
+	return { mistake_period: active_mistake_period, users, mistakes };
 });
