@@ -27,6 +27,12 @@ export interface Mistake_By_Id_Props {
   users: user[];
 }
 
+export interface UserRanking {
+  user_id: number;
+  user_name: string;
+  mistakes: { id: number; name: string; date: Date }[];
+}
+
 export interface Ranking_Props {
-  user_mistakes: UserMistakes[];
+  users: UserRanking[];
 }

@@ -3,6 +3,7 @@ import { prisma } from "~/prisma/client";
 export default defineEventHandler(async (_) => {
   const user_mistakes = await prisma.user_mistake.findMany({
     include: { mistake: true, mistake_period: true, user: true },
+    orderBy: { created_at: "desc" },
   });
 
   if (!user_mistakes) {
@@ -12,7 +13,7 @@ export default defineEventHandler(async (_) => {
   const result: {
     user_id: number;
     user_name: string;
-    mistakes: { id: number; name: string }[];
+    mistakes: { id: number; name: string; date: Date }[];
   }[] = [];
 
   user_mistakes.forEach((data) => {
@@ -21,16 +22,23 @@ export default defineEventHandler(async (_) => {
       result[idx].mistakes.push({
         id: data.mistake.id,
         name: data.mistake.name,
+        date: data.mistake_period.created_at,
       });
     } else {
       result.push({
         user_id: data.user_id,
         user_name: data.user.name,
-        mistakes: [{ id: data.mistake_id, name: data.mistake.name }],
+        mistakes: [
+          {
+            id: data.mistake_id,
+            name: data.mistake.name,
+            date: data.mistake_period.created_at,
+          },
+        ],
       });
     }
   });
 
   result.sort((a: any, b: any) => b.mistakes.length - a.mistakes.length);
-  return { user_mistakes: result };
+  return { users: result };
 });
