@@ -26,3 +26,7 @@ export interface Mistake_By_Id_Props {
   user_mistakes: UserMistakes[];
   users: user[];
 }
+
+export interface Ranking_Props {
+  user_mistakes: UserMistakes[];
+}

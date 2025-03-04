@@ -70,6 +70,7 @@ async function save_new_mistake_period() {
       >
         + Criar
       </button>
+
       <form @submit.prevent="save_new_user">
         <input
           v-if="is_new_user_input_open"
@@ -136,8 +137,18 @@ async function save_new_mistake_period() {
         />
       </div>
     </div>
-    <NuxtLink to="/vacilos" class="w-fit mt-3 underline text-xl cursor-pointer"
-      >Ver quadros encerrados</NuxtLink
-    >
+
+    <div class="flex items-center gap-3">
+      <NuxtLink
+        to="/vacilos"
+        class="w-fit text-xl cursor-pointer hover:underline"
+        >Ver quadros encerrados</NuxtLink
+      >
+      <NuxtLink
+        to="/ranking"
+        class="w-fit text-xl cursor-pointer hover:underline"
+        >Ver ranking geral</NuxtLink
+      >
+    </div>
   </div>
 </template>
