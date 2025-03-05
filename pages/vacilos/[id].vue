@@ -81,7 +81,7 @@ async function finish_mistake_period() {
 
       <div
         v-if="data?.user_mistakes && data.user_mistakes.length > 0"
-        class="flex flex-wrap gap-3"
+        class="flex flex-wrap gap-3 mb-10"
       >
         <div
           v-for="user in data?.user_mistakes"
@@ -98,7 +98,7 @@ async function finish_mistake_period() {
         </div>
       </div>
 
-      <div v-if="data?.mistake_period?.is_active" class="mt-10 flex flex-col">
+      <div v-if="data?.mistake_period?.is_active" class="flex flex-col mt-4">
         <span>{{
           `Preço de dois centos de salgados com 2 refris: R$120,00.`
         }}</span>

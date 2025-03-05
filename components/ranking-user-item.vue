@@ -8,23 +8,25 @@ const isDetailsOpen = ref(false);
 </script>
 
 <template>
-  <div
-    class="shadow p-4 rounded w-[400px] cursor-pointer"
-    @click="isDetailsOpen = !isDetailsOpen"
-  >
-    <span>{{
-      `${idx + 1} - ${user.user_name} (${user.mistakes.length})`
-    }}</span>
+  <div class="w-[600px] flex flex-col gap-2">
+    <div
+      class="border border-gray-200 shadow p-4 rounded cursor-pointer h-fit"
+      @click="isDetailsOpen = !isDetailsOpen"
+    >
+      <span>{{
+        `${idx + 1} - ${user.user_name} (${user.mistakes.length})`
+      }}</span>
+    </div>
 
     <div
-      v-if="isDetailsOpen && user.mistakes.length > 0"
-      class="h-fit max-h-[400px] overflow-y-auto"
+      v-if="isDetailsOpen"
+      class="h-fit max-h-[300px] overflow-y-auto border border-gray-200 rounded"
     >
       <div
         v-for="mistake in user.mistakes"
-        class="w-[90%] mt-3 border-b border-gray-200 last:border-b-0 p-3 flex flex-col gap-2"
+        class="w-[95%] mb-3 last:mb-0 border-b border-gray-200 last:border-b-0 p-3 flex flex-col gap-1"
       >
-        <span>{{ mistake.name }}</span>
+        <span class="font-bold">{{ mistake.name }}</span>
         <span>{{ convert_date_to_brazilian_format(mistake.date) }}</span>
       </div>
     </div>
