@@ -61,94 +61,79 @@ async function save_new_mistake_period() {
 </script>
 
 <template>
-  <div class="px-5 xl:px-0 my-10 w-full max-w-7xl mx-auto flex flex-col gap-4">
-    <div class="flex items-center gap-2 w-fit border-b-2 border-gray-200 pb-2">
-      <h1 class="font-light text-2xl">Usuários</h1>
+  <!-- <div class="flex items-center gap-2 border-b-2 border-gray-200 pb-2">
+    <h1 class="font-light text-2xl">Usuários</h1>
+    <button
+      class="border border-black p-1 rounded-lg hover:bg-black hover:text-white cursor-pointer"
+      @click="show_new_user_input"
+    >
+      + Criar
+    </button>
+
+    <form @submit.prevent="save_new_user">
+      <input
+        v-if="is_new_user_input_open"
+        v-model="new_user"
+        ref="inputRef"
+        class="border-2 p-3 rounded-lg"
+      />
+    </form>
+  </div> -->
+
+  <div>
+    <div
+      v-if="!data?.mistake_period?.is_active"
+      class="w-fit flex gap-2 items-center"
+    >
+      <span class="block">Sem quadros ativos</span>
       <button
-        class="border border-black p-1 rounded-lg hover:bg-black hover:text-white cursor-pointer"
-        @click="show_new_user_input"
+        class="border border-black p-1 rounded-lg cursor-pointer hover:bg-black hover:text-white"
+        @click="save_new_mistake_period"
       >
         + Criar
       </button>
-
-      <form @submit.prevent="save_new_user">
-        <input
-          v-if="is_new_user_input_open"
-          v-model="new_user"
-          ref="inputRef"
-          class="border-2 p-3 rounded-lg"
-        />
-      </form>
     </div>
-
-    <div class="my-4">
-      <div
-        v-if="!data?.mistake_period?.is_active"
-        class="w-fit flex gap-2 items-center"
-      >
-        <span class="block">Sem quadros ativos</span>
-        <button
-          class="border border-black p-1 rounded-lg cursor-pointer hover:bg-black hover:text-white"
-          @click="save_new_mistake_period"
+    <div v-else class="flex items-center justify-between gap-2">
+      <div class="flex flex-col">
+        <span
+          >Quadro iniciado em
+          {{
+            convert_date_to_brazilian_format(
+              data?.mistake_period.created_at ?? ""
+            )
+          }}</span
         >
-          + Criar
-        </button>
+        <span class="mt-4 font-bold text-xl">{{
+          `Total de R$${total_mistakes * 5},00 reais em vacilos`
+        }}</span>
       </div>
-      <div v-else class="flex items-center justify-between gap-2">
-        <div class="flex flex-col">
-          <span
-            >Quadro iniciado em
-            {{
-              convert_date_to_brazilian_format(
-                data?.mistake_period.created_at ?? ""
-              )
-            }}</span
-          >
-          <span class="font-bold text-xl">{{
-            `Total de R$${total_mistakes * 5},00 reais em vacilos`
-          }}</span>
-        </div>
-        <button
-          class="cursor-pointer border border-black p-3 rounded font-bold hover:bg-black hover:text-white"
-          @click="
-            async () => await navigateTo(`/vacilos/${data?.mistake_period.id}`)
-          "
-        >
-          Ver quadro
-        </button>
-      </div>
-    </div>
-
-    <div v-if="data?.users && data.users.length > 0">
-      <p class="italic text-sm text-gray-400">
-        As posições listadas abaixo são calculadas por quadro, essa não é a
-        posição geral.
-      </p>
-
-      <div class="flex flex-wrap gap-5">
-        <user-card
-          v-for="(user, idx) in data.users"
-          :key="user.id"
-          :user="user"
-          :mistakes="user_mistakes(user.id)"
-          :mistake_period_id="data.mistake_period.id"
-          :vacilos_position="idx + 1"
-          :refresh="refresh"
-        />
-      </div>
-    </div>
-
-    <div class="flex items-center gap-3">
-      <NuxtLink
-        to="/vacilos"
-        class="w-fit text-xl cursor-pointer hover:underline"
-        >Ver quadros encerrados</NuxtLink
+      <button
+        class="cursor-pointer border border-black p-3 rounded font-bold hover:bg-black hover:text-white"
+        @click="
+          async () => await navigateTo(`/vacilos/${data?.mistake_period.id}`)
+        "
       >
-      <NuxtLink
-        to="/ranking"
-        class="w-fit text-xl cursor-pointer hover:underline"
-        >Ver ranking geral</NuxtLink
-      >
+        Ver quadro
+      </button>
+    </div>
+  </div>
+
+  <div v-if="data?.users && data.users.length > 0">
+    <p class="text-sm text-gray-400">
+      As posições listadas abaixo são calculadas por quadro, essa não é a
+      posição geral.
+    </p>
+
+    <div class="mt-5 flex flex-wrap gap-5">
+      <user-card
+        v-for="(user, idx) in data.users"
+        :key="user.id"
+        :user="user"
+        :mistakes="user_mistakes(user.id)"
+        :mistake_period_id="data.mistake_period.id"
+        :vacilos_position="idx + 1"
+        :refresh="refresh"
+      />
     </div>
   </div>
 </template>

@@ -20,7 +20,7 @@ const isDetailsOpen = ref(false);
 
     <div
       v-if="isDetailsOpen"
-      class="h-fit max-h-[300px] overflow-y-auto border border-gray-200 rounded"
+      class="no-scrollbar h-fit max-h-[300px] overflow-y-auto border border-gray-200 rounded"
     >
       <div
         v-for="mistake in user.mistakes"
