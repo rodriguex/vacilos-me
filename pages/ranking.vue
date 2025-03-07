@@ -5,7 +5,7 @@ const { data } = await useFetch<Ranking_Props>("/api/ranking");
 </script>
 
 <template>
-  <div class="flex flex-col items-center">
+  <div class="flex flex-col">
     <h1 class="font-bold text-3xl">Ranking Fucking Geral</h1>
     <div class="mt-10 flex flex-col gap-2">
       <ranking-user-item

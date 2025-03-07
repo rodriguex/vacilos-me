@@ -103,12 +103,12 @@ async function save_new_mistake_period() {
             )
           }}</span
         >
-        <span class="mt-4 font-bold text-xl">{{
+        <span class="mt-4 font-bold text-[#331f52] text-xl">{{
           `Total de R$${total_mistakes * 5},00 reais em vacilos`
         }}</span>
       </div>
       <button
-        class="cursor-pointer border border-black p-3 rounded font-bold hover:bg-black hover:text-white"
+        class="cursor-pointer border border-[#331f52] p-3 rounded font-bold hover:bg-[#331f52] hover:text-white text-[#331f52]"
         @click="
           async () => await navigateTo(`/vacilos/${data?.mistake_period.id}`)
         "
