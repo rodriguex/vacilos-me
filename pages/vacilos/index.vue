@@ -8,7 +8,7 @@ const { data } = await useFetch<{ mistake_periods: mistake_period[] }>(
 </script>
 
 <template>
-  <h1 class="font-bold text-2xl">
+  <h1 class="font-bold text-2xl text-[#331f52]">
     {{ `Quadros encerrados (${data?.mistake_periods.length})` }}
   </h1>
 
@@ -18,15 +18,15 @@ const { data } = await useFetch<{ mistake_periods: mistake_period[] }>(
   >
     <div
       v-for="mistake_period in data.mistake_periods"
-      class="flex gap-1 border border-gray-300 rounded-lg p-4 cursor-pointer hover:bg-gray-200"
+      class="flex gap-1 border shadow border-gray-200 rounded-lg p-4 cursor-pointer hover:bg-[#331f52] hover:text-white"
     >
-      <NuxtLink :to="{ path: `/vacilos/${mistake_period.id}` }">
-        <span class="text-gray-500">
+      <NuxtLink :to="{ path: `/vacilos/${mistake_period.id}` }" class="text-lg">
+        <span class="font-bold">
           {{
             convert_date_to_brazilian_format(mistake_period.created_at, false)
           }}</span
         >
-        <span class="text-gray-500">
+        <span class="font-bold">
           -
           {{
             convert_date_to_brazilian_format(

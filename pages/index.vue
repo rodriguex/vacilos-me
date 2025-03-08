@@ -2,7 +2,7 @@
 import type { Home_Props } from "~/types";
 import { convert_date_to_brazilian_format } from "../helpers";
 
-const { data, refresh } = await useFetch<Home_Props>("/api/users");
+const { data, refresh } = await useFetch<Home_Props>("/api/home");
 
 const is_new_user_input_open = ref(false);
 const new_user = ref("");
@@ -104,11 +104,11 @@ async function save_new_mistake_period() {
           }}</span
         >
         <span class="mt-4 font-bold text-[#331f52] text-xl">{{
-          `Total de R$${total_mistakes * 5},00 reais em vacilos`
+          `Total de R$${(total_mistakes * 5).toFixed(2)} reais em vacilos`
         }}</span>
       </div>
       <button
-        class="cursor-pointer border border-[#331f52] p-3 rounded font-bold hover:bg-[#331f52] hover:text-white text-[#331f52]"
+        class="cursor-pointer border-2 border-[#331f52] p-3 rounded font-bold hover:bg-[#331f52] hover:text-white text-[#331f52]"
         @click="
           async () => await navigateTo(`/vacilos/${data?.mistake_period.id}`)
         "

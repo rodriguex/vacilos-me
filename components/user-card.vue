@@ -20,9 +20,9 @@ defineProps<{
       <span class="text-base">Posição atual:</span>
       <span class="font-bold">{{ vacilos_position }}</span>
     </div>
-    <span>{{ `${user.name} - R$${mistakes.length * 5},00` }}</span>
+    <span>{{ `${user.name} - R$${(mistakes.length * 5).toFixed(2)}` }}</span>
     <div class="mt-5 flex flex-col gap-2">
-      <span v-if="mistakes.length" class="font-bold">vacilos..</span>
+      <span v-if="mistakes.length" class="font-bold">vacilos:</span>
       <div
         v-if="mistakes.length > 0"
         class="pr-3 max-h-[120px] overflow-y-auto"

@@ -66,14 +66,16 @@ async function finish_mistake_period() {
       </div>
       <button
         v-if="data?.mistake_period.is_active"
-        class="border border-black p-2 rounded hover:bg-black hover:text-white cursor-pointer"
+        class="border text-[#331f52] border-[#331f52] p-2 rounded hover:text-white hover:bg-[#331f52] cursor-pointer"
         @click="finish_mistake_period"
       >
         Encerrar quadro
       </button>
     </div>
-    <span class="font-bold text-xl mt-5">{{
-      `Total de vacilos: ${mistakes.length} (R$${mistakes.length * 5},00 reais)`
+    <span class="font-bold text-[#331f52] text-xl mt-5">{{
+      `Total de vacilos: ${mistakes.length} (R$${(mistakes.length * 5).toFixed(
+        2
+      )} reais)`
     }}</span>
 
     <div
@@ -85,7 +87,7 @@ async function finish_mistake_period() {
         class="mt-4 border border-gray-200 p-5 rounded w-[300px]"
       >
         <span>{{
-          `${user.user_name} - R$${user.mistakes.length * 5},00`
+          `${user.user_name} - R$${(user.mistakes.length * 5).toFixed(2)}`
         }}</span>
         <div class="mt-2 flex flex-col gap-1">
           <span class="" v-for="(mistake, idx) in user.mistakes">
@@ -97,13 +99,13 @@ async function finish_mistake_period() {
 
     <div v-if="data?.mistake_period?.is_active" class="flex flex-col mt-4">
       <span>{{
-        `Preço de dois centos de salgados com 2 refris: R$120,00.`
+        `Preço de dois centos de salgados com 2 refris: R$120.00.`
       }}</span>
       <span class="font-bold text-lg">{{
-        `Falta: R$${total - mistakes.length * 5},00`
+        `Falta: R$${(total - mistakes.length * 5).toFixed(2)}`
       }}</span>
       <button
-        class="mt-2 w-fit border border-black p-3 rounded font-bold cursor-pointer hover:bg-black hover:text-white"
+        class="mt-2 w-fit border-2 border-[#331f52] text-[#331f52] p-3 rounded font-bold cursor-pointer hover:bg-[#331f52] hover:text-white"
         @click="is_food_table_open = !is_food_table_open"
       >
         Ajuda no salgado

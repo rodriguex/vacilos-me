@@ -22,7 +22,7 @@ export default defineEventHandler(async (_) => {
       result[idx].mistakes.push({
         id: data.mistake.id,
         name: data.mistake.name,
-        date: data.mistake_period.created_at,
+        date: data.created_at,
       });
     } else {
       result.push({
@@ -32,7 +32,7 @@ export default defineEventHandler(async (_) => {
           {
             id: data.mistake_id,
             name: data.mistake.name,
-            date: data.mistake_period.created_at,
+            date: data.created_at,
           },
         ],
       });
