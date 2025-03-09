@@ -41,17 +41,6 @@ async function show_new_user_input() {
   }
 }
 
-async function save_new_user() {
-  await $fetch("/api/users", {
-    method: "POST",
-    body: {
-      name: new_user.value,
-    },
-  });
-  new_user.value = "";
-  refresh();
-}
-
 async function save_new_mistake_period() {
   await $fetch("/api/mistake_periods", {
     method: "post",
@@ -61,25 +50,6 @@ async function save_new_mistake_period() {
 </script>
 
 <template>
-  <!-- <div class="flex items-center gap-2 border-b-2 border-gray-200 pb-2">
-    <h1 class="font-light text-2xl">Usuários</h1>
-    <button
-      class="border border-black p-1 rounded-lg hover:bg-black hover:text-white cursor-pointer"
-      @click="show_new_user_input"
-    >
-      + Criar
-    </button>
-
-    <form @submit.prevent="save_new_user">
-      <input
-        v-if="is_new_user_input_open"
-        v-model="new_user"
-        ref="inputRef"
-        class="border-2 p-3 rounded-lg"
-      />
-    </form>
-  </div> -->
-
   <div>
     <div
       v-if="!data?.mistake_period?.is_active"
