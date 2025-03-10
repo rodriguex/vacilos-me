@@ -12,6 +12,7 @@ export default defineNuxtConfig({
   googleFonts: {
     families: {
       DynaPuff: true,
+      Sniglet: true,
     },
   },
 });

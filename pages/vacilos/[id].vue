@@ -72,7 +72,7 @@ async function finish_mistake_period() {
         Encerrar quadro
       </button>
     </div>
-    <span class="font-bold text-[#331f52] text-xl mt-5">{{
+    <span class="dyna font-bold text-[#331f52] text-xl mt-5">{{
       `Total de vacilos: ${mistakes.length} (R$${(mistakes.length * 5).toFixed(
         2
       )} reais)`
@@ -86,11 +86,11 @@ async function finish_mistake_period() {
         v-for="user in data?.user_mistakes"
         class="mt-4 border border-gray-200 p-5 rounded w-[300px]"
       >
-        <span>{{
+        <span class="font-bold dyna">{{
           `${user.user_name} - R$${(user.mistakes.length * 5).toFixed(2)}`
         }}</span>
         <div class="mt-2 flex flex-col gap-1">
-          <span class="" v-for="(mistake, idx) in user.mistakes">
+          <span class="text-gray-500" v-for="(mistake, idx) in user.mistakes">
             {{ `${idx + 1} - ${mistake.name}` }}
           </span>
         </div>

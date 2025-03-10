@@ -19,7 +19,7 @@ async function saveNewUser() {
 </script>
 
 <template>
-  <h1 class="mb-8 font-bold text-2xl text-[#331f52]">Users page</h1>
+  <h1 class="mb-8 font-bold text-2xl text-[#331f52]">Usuários cadastrados</h1>
 
   <div
     class="flex items-center mb-4 gap-1 cursor-pointer text-[#331f52] w-fit"

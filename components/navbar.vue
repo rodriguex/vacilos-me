@@ -20,16 +20,6 @@ function isCurrentRoute(path: string) {
     </NuxtLink>
 
     <NuxtLink
-      to="/users"
-      :class="`cursor-pointer flex items-center  gap-3 text-xl p-4 hover:bg-white hover:shadow-lg hover:text-[#331f52] rounded-lg ${
-        isCurrentRoute('/users') ? 'bg-white text-[#331f52]' : 'text-white'
-      }`"
-    >
-      <User />
-      <span>Usuários</span>
-    </NuxtLink>
-
-    <NuxtLink
       to="/vacilos"
       :class="`cursor-pointer flex items-center  gap-3 text-xl p-4 hover:bg-white hover:shadow-lg hover:text-[#331f52] rounded-lg ${
         isCurrentRoute('/vacilos') ? 'bg-white text-[#331f52]' : 'text-white'
@@ -47,6 +37,16 @@ function isCurrentRoute(path: string) {
     >
       <Trophy />
       <span>Ranking</span>
+    </NuxtLink>
+
+    <NuxtLink
+      to="/users"
+      :class="`cursor-pointer flex items-center  gap-3 text-xl p-4 hover:bg-white hover:shadow-lg hover:text-[#331f52] rounded-lg ${
+        isCurrentRoute('/users') ? 'bg-white text-[#331f52]' : 'text-white'
+      }`"
+    >
+      <User />
+      <span>Usuários</span>
     </NuxtLink>
   </div>
 </template>

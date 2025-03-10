@@ -10,10 +10,10 @@ const isDetailsOpen = ref(false);
 <template>
   <div class="w-[600px] flex flex-col gap-2">
     <div
-      class="border border-gray-200 shadow p-4 rounded cursor-pointer h-fit"
+      class="border border-gray-200 shadow p-4 rounded cursor-pointer h-fit hover:bg-gray-200"
       @click="isDetailsOpen = !isDetailsOpen"
     >
-      <span class="font-bold text-lg">{{
+      <span class="text-lg">{{
         `${idx + 1} - ${user.user_name} (${user.mistakes.length})`
       }}</span>
     </div>
@@ -26,8 +26,10 @@ const isDetailsOpen = ref(false);
         v-for="mistake in user.mistakes"
         class="w-[95%] mb-3 last:mb-0 border-b border-gray-200 last:border-b-0 p-3 flex flex-col gap-1"
       >
-        <span class="font-normal">{{ mistake.name }}</span>
-        <span>{{ convert_date_to_brazilian_format(mistake.date) }}</span>
+        <span class="font-bold dyna">{{ mistake.name }}</span>
+        <span class="text-gray-400">{{
+          convert_date_to_brazilian_format(mistake.date)
+        }}</span>
       </div>
     </div>
   </div>
