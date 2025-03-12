@@ -94,7 +94,7 @@ async function save_new_mistake_period() {
       posição geral.
     </p>
 
-    <div class="mt-5 flex flex-wrap gap-5">
+    <div class="my-8 flex flex-wrap gap-5">
       <user-card
         v-for="(user, idx) in data.users"
         :key="user.id"

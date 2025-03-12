@@ -12,20 +12,26 @@ defineProps<{
 
 <template>
   <div
-    class="w-full max-w-[400px] shadow bg-white border border-gray-100 rounded-lg h-fit p-5"
+    class="w-full max-w-[400px] bg-white border border-gray-200 rounded-lg h-fit p-5"
   >
     <div
-      class="flex items-center pb-2 mb-3 border-b border-gray-200 gap-1 text-lg"
+      class="flex items-center justify-between pb-2 mb-3 border-b border-gray-200 gap-1 text-lg"
     >
-      <span class="text-base">Posição atual:</span>
-      <span class="font-bold">{{ vacilos_position }}</span>
+      <div class="flex items-center gap-2">
+        <span>Posição atual:</span>
+        <span class="font-bold">{{ vacilos_position }}</span>
+      </div>
+      <span class="font-light">{{
+        `${user.name} - R$${(mistakes.length * 5).toFixed(2)}`
+      }}</span>
     </div>
-    <span>{{ `${user.name} - R$${(mistakes.length * 5).toFixed(2)}` }}</span>
+
     <div class="mt-5 flex flex-col gap-2">
       <span v-if="mistakes.length" class="font-bold">vacilos:</span>
+
       <div
         v-if="mistakes.length > 0"
-        class="pr-3 max-h-[120px] overflow-y-auto"
+        class="pr-3 max-h-[120px] overflow-y-auto mb-3"
       >
         <ul class="list-decimal">
           <li v-for="mistake in mistakes" :key="mistake.id" class="w-fit ml-5">
@@ -33,6 +39,7 @@ defineProps<{
           </li>
         </ul>
       </div>
+
       <new-vacilo
         :mistake_period_id="mistake_period_id"
         :user_id="user.id"
