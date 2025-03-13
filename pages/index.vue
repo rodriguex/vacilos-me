@@ -5,7 +5,6 @@ import { convert_date_to_brazilian_format } from "../helpers";
 const { data, refresh } = await useFetch<Home_Props>("/api/home");
 
 const is_new_user_input_open = ref(false);
-const new_user = ref("");
 const input_ref = ref<any>(null);
 
 const total_mistakes = computed(() => {
@@ -63,28 +62,18 @@ async function save_new_mistake_period() {
         + Criar
       </button>
     </div>
-    <div v-else class="flex items-center justify-between gap-2">
-      <div class="flex flex-col">
-        <span
-          >Quadro iniciado em
-          {{
-            convert_date_to_brazilian_format(
-              data?.mistake_period.created_at ?? ""
-            )
-          }}</span
-        >
-        <span class="mt-4 font-bold text-[#331f52] text-xl">{{
-          `Total de R$${(total_mistakes * 5).toFixed(2)} reais em vacilos`
-        }}</span>
-      </div>
-      <button
-        class="cursor-pointer border-2 border-[#331f52] p-3 rounded font-bold hover:bg-[#331f52] hover:text-white text-[#331f52]"
-        @click="
-          async () => await navigateTo(`/vacilos/${data?.mistake_period.id}`)
-        "
+    <div v-else class="flex flex-col gap-2">
+      <span
+        >Quadro iniciado em
+        {{
+          convert_date_to_brazilian_format(
+            data?.mistake_period.created_at ?? ""
+          )
+        }}</span
       >
-        Ver quadro
-      </button>
+      <span class="mt-4 font-bold text-[#331f52] text-xl">{{
+        `Total de R$${(total_mistakes * 5).toFixed(2)} reais em vacilos`
+      }}</span>
     </div>
   </div>
 
@@ -94,7 +83,16 @@ async function save_new_mistake_period() {
       posição geral.
     </p>
 
-    <div class="my-8 flex flex-wrap gap-5">
+    <button
+      class="mt-4 cursor-pointer border-2 border-[#331f52] p-3 rounded font-bold hover:bg-[#331f52] hover:text-white text-[#331f52]"
+      @click="
+        async () => await navigateTo(`/vacilos/${data?.mistake_period.id}`)
+      "
+    >
+      Ver quadro
+    </button>
+
+    <div class="my-8 flex flex-wrap gap-3">
       <user-card
         v-for="(user, idx) in data.users"
         :key="user.id"

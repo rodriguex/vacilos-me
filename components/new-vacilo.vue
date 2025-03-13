@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { Plus } from "lucide-vue-next";
+import { PlusCircle } from "lucide-vue-next";
 
 const props = defineProps<{
   mistake_period_id: number;
@@ -23,11 +23,14 @@ async function save_new_mistake() {
 </script>
 
 <template>
-  <form @submit.prevent="save_new_mistake" class="flex items-center">
-    <Plus :size="20" />
+  <form
+    @submit.prevent="save_new_mistake"
+    class="flex items-center gap-3 border-b-2 border-black"
+  >
+    <PlusCircle :size="20" />
     <input
       v-model="vacilo"
-      class="w-full h-[40px] hover:border-b-2 border-gray-200 focus:border-b-2 focus:border-black p-2 focus:outline-none placeholder:text-gray-400"
+      class="w-full h-[40px] focus:outline-none placeholder:text-gray-400"
       placeholder="adicionar novo vacilo..."
     />
   </form>
