@@ -18,8 +18,8 @@ CREATE TABLE "mistake" (
 CREATE TABLE "mistake_period" (
     "id" SERIAL NOT NULL,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "finished_at" TIMESTAMP(3) NOT NULL,
-    "is_active" BOOLEAN NOT NULL,
+    "finished_at" TIMESTAMP(3),
+    "is_active" BOOLEAN NOT NULL DEFAULT true,
 
     CONSTRAINT "mistake_period_pkey" PRIMARY KEY ("id")
 );
